@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "dog.wunder.doc"
+        minSdkVersion 21
+        targetSdkVersion 27 // Need newer version of okhttp-tls to support 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "bankId"
+    productFlavors {
+        demo {
+            dimension "bankId"
+            applicationIdSuffix ".demo"
+            versionNameSuffix "-demo"
+        }
+        prod {
+            dimension "bankId"
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Coroutines
+    def coroutines_version = "1.0.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    // For doing coroutines on UI thread
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.1.0-alpha03'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    def nav_version = "1.0.0-alpha09"
+
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation("com.squareup.moshi:moshi:1.8.0")
+    implementation 'com.squareup.retrofit2:converter-moshi:2.5.0'
+    implementation("com.squareup.okhttp3:okhttp:3.12.1")
+    implementation("com.squareup.okhttp3:okhttp-tls:3.12.1")
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation("com.squareup.okhttp3:mockwebserver:3.12.1")
+
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:3.12.1")
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bankid_rfa2_not_installed">Du har inte BankID-appen installerad. Kontakta din internetbank.</string>
+</resources>
